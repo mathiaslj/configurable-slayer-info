@@ -33,17 +33,23 @@ import net.runelite.api.gameval.NpcID;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 public class SlayerTaskRegistry {
 
     private final ConfigurableSlayerInfoConfig config;
 
     // Map is built at runtime in the constructor, not static
-    private final Map<String, SlayerTask> tasks;
+    private Map<String, SlayerTask> tasks = new HashMap<>();
 
     public SlayerTaskRegistry(ConfigurableSlayerInfoConfig config) {
         this.config = config;
-        this.tasks = Map.ofEntries(
+        rebuildTasks();
+    }
+
+    public void rebuildTasks()
+    {
+        tasks = Map.ofEntries(
                 Map.entry("banshees", new SlayerTask("Banshees", List.of(NpcID.SLAYER_BANSHEE_1), List.of(
                                 new WorldPoint(3442, 3542, 0)
                         ), List.of(

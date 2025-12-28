@@ -215,6 +215,8 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
             return;
         }
 
+        slayerTaskRegistry.rebuildTasks();
+
         // Set a dummy task
         if (event.getKey().equals("debugTask")) {
             if (event.getNewValue() == null) {
