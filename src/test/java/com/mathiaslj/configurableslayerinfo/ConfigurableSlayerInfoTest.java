@@ -1,11 +1,11 @@
-package com.brastasauce.turaelskipping;
+package com.mathiaslj.configurableslayerinfo;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class TuraelSkippingTest {
+public class ConfigurableSlayerInfoTest {
     public static void main(String[] args) throws Exception {
-        ExternalPluginManager.loadBuiltin(TuraelSkippingPlugin.class);
+        ExternalPluginManager.loadBuiltin(ConfigurableSlayerInfoPlugin.class);
         RuneLite.main(args);
     }
 }
