@@ -100,6 +100,7 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
 
     private WorldPoint debugWorldPointOne;
     private WorldPoint debugWorldPointTwo;
+    private SlayerTaskRegistry slayerTaskRegistry;
 
     @Inject
     private Client client;
@@ -135,6 +136,7 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     protected void startUp() {
         overlayManager.add(slayerTaskOverlay);
         overlayManager.add(debugAreaOutlineOverlay);
+        slayerTaskRegistry = new SlayerTaskRegistry(config);
 
         debugAreaOutlineOverlay.setUseAlternativeOutline(true);
     }
@@ -357,7 +359,7 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     }
 
     private void startTask(String taskName) {
-        SlayerTask lookupSlayerTask = SlayerTaskRegistry.getSlayerTaskByNpcName(taskName.toLowerCase());
+        SlayerTask lookupSlayerTask = slayerTaskRegistry.getSlayerTaskByNpcName(taskName);
 
         if (lookupSlayerTask != null) {
             this.currentSlayerTask = lookupSlayerTask;
