@@ -30,6 +30,7 @@ import com.mathiaslj.configurableslayerinfo.utils.WorldAreaUtils;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.gameval.NpcID;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class SlayerTaskRegistry {
                                             new WorldPoint(3327, 3475, 0),
                                             new WorldPoint(3398, 3507, 0)
                                     )
-                            ), new String[]{"Ring of the elements: Earth Altar (Option 3)", "Digsite pendant (Option 1)", "Digsite/Lumberyard teleport"})
+                            ), new String[]{"Test 1", "Test 2"})
                     ))
             ),
             Map.entry("bears", new SlayerTask("Bears", List.of(NpcID.BROWNBEAR), List.of(

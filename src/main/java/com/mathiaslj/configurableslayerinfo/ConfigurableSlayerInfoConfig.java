@@ -35,6 +35,11 @@ import java.awt.Color;
 public interface ConfigurableSlayerInfoConfig extends Config {
     String CONFIG_GROUP_NAME = "Configurable Slayer Info";
 
+    public static final int BASE = 100;
+
+    public static final int POSITION_BATS = BASE;
+    public static final int POSITION_SKELETONS = BASE + 1;
+
     // General settings
     @ConfigSection(
             position = 0,
@@ -77,7 +82,7 @@ public interface ConfigurableSlayerInfoConfig extends Config {
     }
 
     @ConfigItem(
-            position = 1,
+            position = 3,
             keyName = "useShortestPath",
             name = "Use 'Shortest Path' plugin",
             description = "Draws the shortest path to the assigned task.<br/>" +
@@ -189,4 +194,45 @@ public interface ConfigurableSlayerInfoConfig extends Config {
     default boolean enableWorldPointSelector() {
         return false;
     }
+
+    // Bats
+    @ConfigSection(
+            position = POSITION_BATS,
+            name = "Bats",
+            closedByDefault = true,
+            description = "Information to display for slayer task"
+    )
+    String batsSettings = "batsSettings";
+
+    @ConfigItem(
+            keyName = "Bats",
+            name = "Bats information",
+            description = "Information to display for slayer task",
+            section = batsSettings,
+            position = 0
+    )
+    default String batsInfo() {
+        return "Digsite pendent -> run North";
+    }
+
+    // Skeletons
+    @ConfigSection(
+            position = POSITION_SKELETONS,
+            name = "Skeletons",
+            closedByDefault = true,
+            description = "Information to display for slayer task"
+    )
+    String skeletonsSettings = "skeletonsSettings";
+
+    @ConfigItem(
+            keyName = "Skeletons",
+            name = "Skeletons information",
+            description = "Information to display for slayer task",
+            section = skeletonsSettings,
+            position = 0
+    )
+    default String skeletonsInfo() {
+        return "Catacombs of Kourend -> Run West";
+    }
 }
+

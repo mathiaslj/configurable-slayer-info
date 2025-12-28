@@ -87,9 +87,6 @@ import java.util.regex.Pattern;
         tags = {"slayer", "overlay", "task", "configurable"}
 )
 public class ConfigurableSlayerInfoPlugin extends Plugin {
-    private static final String TURAEL = "Turael";
-    private static final String AYA = "Aya";
-
     private static final Pattern SLAYER_ASSIGN_MESSAGE = Pattern.compile("Your new task is to kill \\d+ (?<name>.+)\\.");
     private static final Pattern SLAYER_CURRENT_MESSAGE = Pattern.compile("You're still hunting (?<name>.+)[,;] you have \\d+ to go\\.");
     private static final Pattern SLAYER_CURRENT_CHAT_MESSAGE = Pattern.compile("You're assigned to kill (?<name>.+)[,;] only \\d+ more to go\\.");
@@ -158,7 +155,22 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
         Widget chatBoxNpcText = client.getWidget(InterfaceID.ChatLeft.TEXT);
 
         // Check if current widget is either Turael or Aya
-        if (chatBoxNpcName != null && chatBoxNpcText != null && (chatBoxNpcName.getText().equals(TURAEL) || chatBoxNpcName.getText().equals(AYA))) {
+        if (chatBoxNpcName != null && chatBoxNpcText != null &&
+                (chatBoxNpcName.getText().equalsIgnoreCase("turael") ||
+                        chatBoxNpcName.getText().equals("aya") ||
+                        chatBoxNpcName.getText().equals("spria") ||
+                        chatBoxNpcName.getText().equals("krystilia") ||
+                        chatBoxNpcName.getText().equals("mazchna") ||
+                        chatBoxNpcName.getText().equals("achtryn") ||
+                        chatBoxNpcName.getText().equals("vannaka") ||
+                        chatBoxNpcName.getText().equals("chaeldar") ||
+                        chatBoxNpcName.getText().equals("konar quo maten") ||
+                        chatBoxNpcName.getText().equals("nieve") ||
+                        chatBoxNpcName.getText().equals("steve") ||
+                        chatBoxNpcName.getText().equals("duradel") ||
+                        chatBoxNpcName.getText().equals("kuradel")
+                        )
+        ) {
             String npcText = Text.sanitizeMultilineText(chatBoxNpcText.getText());
             String taskName = getTaskName(npcText);
 
