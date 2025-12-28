@@ -57,7 +57,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.game.npcoverlay.HighlightedNpc;
 import net.runelite.client.game.npcoverlay.NpcOverlayService;
 import net.runelite.client.events.PluginMessage;
 import net.runelite.client.plugins.Plugin;
@@ -135,7 +134,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     @Override
     protected void shutDown() {
         overlayManager.remove(slayerTaskOverlay);
-        npcOverlayService.unregisterHighlighter(npcHighlighter);
         worldMapPointManager.removeIf(SlayerTaskWorldMapPoint.class::isInstance);
 
         completeTask();
@@ -220,30 +218,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
                 this.startTask(event.getNewValue().toLowerCase().replace("_", " "));
             }
         }
-
-        // Rebuild the NPC highlighter with the updated settings
-        npcOverlayService.rebuild();
-    }
-
-    @Subscribe
-    public void onNpcSpawned(NpcSpawned npcSpawned) {
-        NPC npc = npcSpawned.getNpc();
-
-        // Add the NPC to the targets for NPC highlighting
-        if (currentSlayerTask != null) {
-            for (int targetNpcId : currentSlayerTask.getNpcIds()) {
-                if (npc.getId() == targetNpcId) {
-                    targets.add(npc);
-                }
-            }
-        }
-    }
-
-    @Subscribe
-    public void onNpcDespawned(NpcDespawned npcDespawned) {
-        // Remove the NPC from the targets
-        NPC npc = npcDespawned.getNpc();
-        targets.remove(npc);
     }
 
     @Subscribe
@@ -359,8 +333,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
                         }
                     }
                 }
-
-                npcOverlayService.registerHighlighter(npcHighlighter);
             }
         }
     }
@@ -368,8 +340,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     private void completeTask() {
         currentSlayerTask = null;
         targets.clear();
-
-        npcOverlayService.unregisterHighlighter(npcHighlighter);
 
         worldMapPointManager.removeIf(SlayerTaskWorldMapPoint.class::isInstance);
     }
@@ -397,20 +367,4 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
         data.put("target", target);
         eventBus.post(new PluginMessage("shortestpath", "path", data));
     }
-
-    public Function<NPC, HighlightedNpc> npcHighlighter = (n) -> {
-        if (targets.contains(n) && config.enableNpcHighlight()) {
-            return HighlightedNpc.builder()
-                    .npc(n)
-                    .highlightColor(config.getNpcColour())
-                    .outline(config.getNpcHighlightMode().equals(NpcHighlightMode.Outline))
-                    .hull(config.getNpcHighlightMode().equals(NpcHighlightMode.Hull))
-                    .tile(config.getNpcHighlightMode().equals(NpcHighlightMode.Tile))
-                    .trueTile(config.getNpcHighlightMode().equals(NpcHighlightMode.TrueTile))
-                    .render(npc -> !npc.isDead())
-                    .build();
-        }
-
-        return null;
-    };
 }

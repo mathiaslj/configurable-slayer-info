@@ -210,6 +210,7 @@ public interface ConfigurableSlayerInfoConfig extends Config {
         return false;
     }
 
+    /*
     // Highlight settings
     @ConfigSection(
             position = 10000,
@@ -253,6 +254,7 @@ public interface ConfigurableSlayerInfoConfig extends Config {
     default Color getNpcColour() {
         return Color.decode("#DDFF00");
     }
+    */
 
     // Debug settings
     @ConfigSection(
