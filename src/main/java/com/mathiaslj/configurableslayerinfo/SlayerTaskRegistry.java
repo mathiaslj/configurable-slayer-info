@@ -50,6 +50,17 @@ public class SlayerTaskRegistry {
     public void rebuildTasks()
     {
         tasks = Map.ofEntries(
+                Map.entry("aberrant spectres", new SlayerTask("Aberrant spectres", List.of(NpcID.SLAYER_ABBERANT_SPECTRE_1), List.of(
+                                new WorldPoint(0, 0, 0)
+                        ), List.of(
+                                new NpcLocation("Aberrant spectres", List.of(
+                                        WorldAreaUtils.fromCorners(
+                                                new WorldPoint(0, 0, 0),
+                                                new WorldPoint(0, 0, 0)
+                                        )
+                                ), config.aberrantSpectresInfo().split("\n"))
+                        ))
+                ),
                 Map.entry("banshees", new SlayerTask("Banshees", List.of(NpcID.SLAYER_BANSHEE_1), List.of(
                                 new WorldPoint(3442, 3542, 0)
                         ), List.of(
@@ -64,7 +75,7 @@ public class SlayerTaskRegistry {
                 Map.entry("bats", new SlayerTask("Bats", List.of(NpcID.SMALL_BAT), List.of(
                                 new WorldPoint(3351, 3490, 0)
                         ), List.of(
-                                new NpcLocation("Silvarea, North of Digsite", List.of(
+                                new NpcLocation("Bats", List.of(
                                         WorldAreaUtils.fromCorners(
                                                 new WorldPoint(3327, 3475, 0),
                                                 new WorldPoint(3398, 3507, 0)

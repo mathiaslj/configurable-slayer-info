@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
 import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
-import com.mathiaslj.configurableslayerinfo.utils.AreaOutlineOverlay;
 import com.mathiaslj.configurableslayerinfo.utils.SlayerTaskOverlay;
 import com.mathiaslj.configurableslayerinfo.utils.SlayerTaskWorldMapPoint;
 import com.mathiaslj.configurableslayerinfo.utils.WorldAreaUtils;
@@ -118,12 +117,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     private WorldMapPointManager worldMapPointManager;
 
     @Inject
-    private AreaOutlineOverlay areaOutlineOverlay;
-
-    @Inject
-    private AreaOutlineOverlay debugAreaOutlineOverlay;
-
-    @Inject
     private SlayerTaskOverlay slayerTaskOverlay;
 
     @Inject
@@ -135,16 +128,13 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     @Override
     protected void startUp() {
         overlayManager.add(slayerTaskOverlay);
-        overlayManager.add(debugAreaOutlineOverlay);
-        slayerTaskRegistry = new SlayerTaskRegistry(config);
 
-        debugAreaOutlineOverlay.setUseAlternativeOutline(true);
+        slayerTaskRegistry = new SlayerTaskRegistry(config);
     }
 
     @Override
     protected void shutDown() {
         overlayManager.remove(slayerTaskOverlay);
-        overlayManager.remove(debugAreaOutlineOverlay);
         npcOverlayService.unregisterHighlighter(npcHighlighter);
         worldMapPointManager.removeIf(SlayerTaskWorldMapPoint.class::isInstance);
 
@@ -231,20 +221,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
             }
         }
 
-        // Re-select the slayer task, so it re-draws the outline if enabled or removes the outline when disabled
-        if (event.getKey().equals("enableSlayerAreaOutline")) {
-            if (this.currentSlayerTask != null) {
-                this.startTask(currentSlayerTask.getName());
-            }
-        }
-
-        // Set the debug WorldPoint values to null to remove the outline
-        if (event.getKey().equals("enableWorldPointSelector")) {
-            if (event.getNewValue() != null && event.getNewValue().equals("false")) {
-                debugAreaOutlineOverlay.setAreas(null);
-            }
-        }
-
         // Rebuild the NPC highlighter with the updated settings
         npcOverlayService.rebuild();
     }
@@ -287,8 +263,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
                     .onClick(menuEntry -> {
                         debugWorldPointOne = null;
                         debugWorldPointTwo = null;
-
-                        debugAreaOutlineOverlay.setAreas(null);
                     });
 
             client.getMenu()
@@ -347,12 +321,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
 
             client.addChatMessage(ChatMessageType.GAMEMESSAGE, "Turael Skipping", "Second WorldPoint has been selected.", "Turael Skipping");
         }
-
-        if (this.debugWorldPointOne != null && debugWorldPointTwo != null) {
-            this.debugAreaOutlineOverlay.setAreas(List.of(
-                    WorldAreaUtils.fromCorners(debugWorldPointOne, debugWorldPointTwo)
-            ));
-        }
     }
 
     @Provides
@@ -365,20 +333,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
 
         if (lookupSlayerTask != null) {
             this.currentSlayerTask = lookupSlayerTask;
-
-            if (config.enableSlayerAreaOutline()) {
-                List<WorldArea> allAreas = new ArrayList<>();
-
-                for (NpcLocation npcLocation : currentSlayerTask.getLocations()) {
-                    allAreas.addAll(npcLocation.getWorldAreas());
-                }
-
-                areaOutlineOverlay.setAreas(allAreas);
-                overlayManager.add(areaOutlineOverlay);
-            } else {
-                areaOutlineOverlay.setAreas(null);
-                overlayManager.remove(areaOutlineOverlay);
-            }
 
             if (config.enableWorldMapIcon()) {
                 for (WorldPoint worldPoint : currentSlayerTask.getWorldMapLocations()) {
@@ -412,9 +366,6 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     }
 
     private void completeTask() {
-        areaOutlineOverlay.setAreas(null);
-        overlayManager.remove(areaOutlineOverlay);
-
         currentSlayerTask = null;
         targets.clear();
 

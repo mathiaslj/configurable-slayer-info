@@ -37,8 +37,9 @@ public interface ConfigurableSlayerInfoConfig extends Config {
 
     public static final int BASE = 100;
 
-    public static final int POSITION_BATS = BASE;
-    public static final int POSITION_SKELETONS = BASE + 1;
+    public static final int POSITION_ABERRANT_SPECTRES = BASE;
+    public static final int POSITION_BATS = BASE + 1;
+    public static final int POSITION_SKELETONS = BASE + 2;
 
     // General settings
     @ConfigSection(
@@ -75,10 +76,11 @@ public interface ConfigurableSlayerInfoConfig extends Config {
             keyName = "displayMapIcon",
             name = "Enable world map icon",
             description = "Displays an icon on the world map where the current task is located.",
-            section = generalSettings
+            section = generalSettings,
+            hidden = true
     )
     default boolean enableWorldMapIcon() {
-        return true;
+        return false;
     }
 
     @ConfigItem(
@@ -87,7 +89,8 @@ public interface ConfigurableSlayerInfoConfig extends Config {
             name = "Use 'Shortest Path' plugin",
             description = "Draws the shortest path to the assigned task.<br/>" +
                     "The 'Shortest Path' plugin needs to be installed and enabled for this to work.",
-            section = generalSettings
+            section = generalSettings,
+            hidden = true
     )
     default boolean useShortestPath() {
         return false;
@@ -134,36 +137,6 @@ public interface ConfigurableSlayerInfoConfig extends Config {
         return Color.decode("#DDFF00");
     }
 
-    // Slayer area outline
-    @ConfigSection(
-            position = 2,
-            name = "Slayer area outline",
-            description = "Slayer area outline"
-    )
-    String slayerAreaOutline = "slayerAreaOutline";
-
-    @ConfigItem(
-            position = 0,
-            keyName = "enableSlayerAreaOutline",
-            name = "Enable slayer area outline",
-            description = "Draws an outline around the slayer locations.",
-            section = slayerAreaOutline
-    )
-    default boolean enableSlayerAreaOutline() {
-        return false;
-    }
-
-    @ConfigItem(
-            position = 1,
-            keyName = "slayerAreaOutlineColour",
-            name = "Slayer area outline colour",
-            description = "Select the colour for the slayer area outline",
-            section = slayerAreaOutline
-    )
-    default Color getSlayerAreaOutlineColour() {
-        return Color.decode("#DDFF00");
-    }
-
     // Debug settings
     @ConfigSection(
             position = 3,
@@ -189,10 +162,31 @@ public interface ConfigurableSlayerInfoConfig extends Config {
             keyName = "enableWorldPointSelector",
             name = "Enable WorldPoint selector",
             description = "Enables WorldPoint selector in the right click menu.",
-            section = debugSettings
+            section = debugSettings,
+            hidden = true
     )
     default boolean enableWorldPointSelector() {
         return false;
+    }
+
+    // Aberrant Spectres
+    @ConfigSection(
+            position = POSITION_ABERRANT_SPECTRES,
+            name = "Aberrant Spectres",
+            closedByDefault = true,
+            description = "Information to display for slayer task"
+    )
+    String aberrantSpectresSettings = "aberrantSpectres";
+
+    @ConfigItem(
+            keyName = "Aberrant Spectres",
+            name = "Aberrant Spectres information",
+            description = "Create individual bullet points in overlay, one per line",
+            section = aberrantSpectresSettings,
+            position = 0
+    )
+    default String aberrantSpectresInfo() {
+        return "Spirit tree (2) -> Run South West to Stronghold slayer cave -> Run South";
     }
 
     // Bats
@@ -207,7 +201,7 @@ public interface ConfigurableSlayerInfoConfig extends Config {
     @ConfigItem(
             keyName = "Bats",
             name = "Bats information",
-            description = "Information to display for slayer task",
+            description = "Create individual bullet points in overlay, one per line",
             section = batsSettings,
             position = 0
     )
@@ -227,7 +221,7 @@ public interface ConfigurableSlayerInfoConfig extends Config {
     @ConfigItem(
             keyName = "Skeletons",
             name = "Skeletons information",
-            description = "Information to display for slayer task",
+            description = "Create individual bullet points in overlay, one per line",
             section = skeletonsSettings,
             position = 0
     )
