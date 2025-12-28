@@ -22,12 +22,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping.utils;
+package com.mathiaslj.configurableslayerinfo.utils;
 
-import com.brastasauce.turaelskipping.TuraelSkippingConfig;
-import com.brastasauce.turaelskipping.TuraelSkippingPlugin;
-import com.brastasauce.turaelskipping.models.NpcLocation;
-import com.brastasauce.turaelskipping.models.SlayerTask;
+import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoConfig;
+import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoPlugin;
+import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
+import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
 import net.runelite.api.Client;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.client.ui.overlay.OverlayPanel;
@@ -41,11 +41,11 @@ import java.awt.Color;
 
 public class SlayerTaskOverlay extends OverlayPanel {
     private final Client client;
-    private final TuraelSkippingPlugin plugin;
-    private final TuraelSkippingConfig config;
+    private final ConfigurableSlayerInfoPlugin plugin;
+    private final ConfigurableSlayerInfoConfig config;
 
     @Inject
-    public SlayerTaskOverlay(Client client, TuraelSkippingPlugin turaelSlayerPlugin, TuraelSkippingConfig config) {
+    public SlayerTaskOverlay(Client client, ConfigurableSlayerInfoPlugin turaelSlayerPlugin, ConfigurableSlayerInfoConfig config) {
         this.client = client;
         this.plugin = turaelSlayerPlugin;
         this.config = config;

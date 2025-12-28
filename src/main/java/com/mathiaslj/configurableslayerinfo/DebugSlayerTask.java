@@ -22,22 +22,8 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping.models;
+package com.mathiaslj.configurableslayerinfo;
 
-import lombok.Getter;
-import net.runelite.api.coords.WorldArea;
-
-import java.util.List;
-
-@Getter
-public class NpcLocation {
-    private final String name;
-    private final String[] teleports;
-    private final List<WorldArea> worldAreas;
-
-    public NpcLocation(String name, List<WorldArea> worldAreas, String[] teleports) {
-        this.name = name;
-        this.worldAreas = worldAreas;
-        this.teleports = teleports;
-    }
+public enum DebugSlayerTask {
+    None
 }

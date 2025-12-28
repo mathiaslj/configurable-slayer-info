@@ -22,16 +22,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping;
+package com.mathiaslj.configurableslayerinfo;
 
 import javax.inject.Inject;
 
-import com.brastasauce.turaelskipping.models.NpcLocation;
-import com.brastasauce.turaelskipping.models.SlayerTask;
-import com.brastasauce.turaelskipping.utils.AreaOutlineOverlay;
-import com.brastasauce.turaelskipping.utils.SlayerTaskOverlay;
-import com.brastasauce.turaelskipping.utils.SlayerTaskWorldMapPoint;
-import com.brastasauce.turaelskipping.utils.WorldAreaUtils;
+import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
+import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
+import com.mathiaslj.configurableslayerinfo.utils.AreaOutlineOverlay;
+import com.mathiaslj.configurableslayerinfo.utils.SlayerTaskOverlay;
+import com.mathiaslj.configurableslayerinfo.utils.SlayerTaskWorldMapPoint;
+import com.mathiaslj.configurableslayerinfo.utils.WorldAreaUtils;
 import com.google.inject.Provides;
 
 
@@ -82,11 +82,11 @@ import java.util.regex.Pattern;
 
 @Slf4j
 @PluginDescriptor(
-        name = "Turael Skipping",
-        description = "Helper plugin for Turael/Aya slayer",
-        tags = {"slayer", "highlight", "overlay", "task", "turael", "aya"}
+        name = "Configurable Slayer Info",
+        description = "Configure overlay info to display when receiving slayer task",
+        tags = {"slayer", "overlay", "task", "configurable"}
 )
-public class TuraelSkippingPlugin extends Plugin {
+public class ConfigurableSlayerInfoPlugin extends Plugin {
     private static final String TURAEL = "Turael";
     private static final String AYA = "Aya";
 
@@ -108,7 +108,7 @@ public class TuraelSkippingPlugin extends Plugin {
     private Client client;
 
     @Inject
-    private TuraelSkippingConfig config;
+    private ConfigurableSlayerInfoConfig config;
 
     @Inject
     private OverlayManager overlayManager;
@@ -197,7 +197,7 @@ public class TuraelSkippingPlugin extends Plugin {
     @Subscribe
     public void onConfigChanged(ConfigChanged event) {
         // Ignore changes from other plugins
-        if (!event.getGroup().equals(TuraelSkippingConfig.CONFIG_GROUP_NAME)) {
+        if (!event.getGroup().equals(ConfigurableSlayerInfoConfig.CONFIG_GROUP_NAME)) {
             return;
         }
 
@@ -340,8 +340,8 @@ public class TuraelSkippingPlugin extends Plugin {
     }
 
     @Provides
-    TuraelSkippingConfig provideConfig(ConfigManager configManager) {
-        return configManager.getConfig(TuraelSkippingConfig.class);
+    ConfigurableSlayerInfoConfig provideConfig(ConfigManager configManager) {
+        return configManager.getConfig(ConfigurableSlayerInfoConfig.class);
     }
 
     private void startTask(String taskName) {

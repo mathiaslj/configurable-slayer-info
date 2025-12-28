@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping;
+package com.mathiaslj.configurableslayerinfo;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
@@ -31,9 +31,9 @@ import net.runelite.client.config.ConfigSection;
 
 import java.awt.Color;
 
-@ConfigGroup(TuraelSkippingConfig.CONFIG_GROUP_NAME)
-public interface TuraelSkippingConfig extends Config {
-    String CONFIG_GROUP_NAME = "Turael skipping";
+@ConfigGroup(ConfigurableSlayerInfoConfig.CONFIG_GROUP_NAME)
+public interface ConfigurableSlayerInfoConfig extends Config {
+    String CONFIG_GROUP_NAME = "Configurable Slayer Info";
 
     // General settings
     @ConfigSection(

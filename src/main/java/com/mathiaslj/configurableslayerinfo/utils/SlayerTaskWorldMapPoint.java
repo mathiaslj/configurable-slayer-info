@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, wesley-221
+ * Copyright (c) 2022, BrastaSauce
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,32 +22,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping;
+package com.mathiaslj.configurableslayerinfo.utils;
 
-public enum DebugSlayerTask {
-    None,
-    Banshees,
-    Bats,
-    Bears,
-    Birds,
-    Cave_Bugs,
-    Cave_Crawlers,
-    Cave_Slimes,
-    Cows,
-    Crawling_Hands,
-    Dogs,
-    Dwarves,
-    Ghosts,
-    Goblins,
-    Icefiends,
-    Kalphite,
-    Lizards,
-    Minotaurs,
-    Monkeys,
-    Rats,
-    Scorpions,
-    Skeletons,
-    Spiders,
-    Wolves,
-    Zombies
+import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoPlugin;
+import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
+import net.runelite.client.util.ImageUtil;
+
+import java.awt.image.BufferedImage;
+
+public class SlayerTaskWorldMapPoint extends WorldMapPoint {
+    public SlayerTaskWorldMapPoint(WorldPoint worldPoint) {
+        super(worldPoint, null);
+
+        BufferedImage taskWorldImage = ImageUtil.loadImageResource(ConfigurableSlayerInfoPlugin.class, "/turael_chathead.png");
+
+        this.setSnapToEdge(true);
+        this.setJumpOnClick(true);
+        this.setName("Turael Task");
+        this.setImage(taskWorldImage);
+    }
 }

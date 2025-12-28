@@ -22,11 +22,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping;
+package com.mathiaslj.configurableslayerinfo;
 
-import com.brastasauce.turaelskipping.models.NpcLocation;
-import com.brastasauce.turaelskipping.models.SlayerTask;
-import com.brastasauce.turaelskipping.utils.WorldAreaUtils;
+import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
+import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
+import com.mathiaslj.configurableslayerinfo.utils.WorldAreaUtils;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.gameval.NpcID;
 

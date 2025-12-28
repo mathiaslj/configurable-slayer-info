@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, BrastaSauce
+ * Copyright (c) 2025, wesley-221
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,24 +22,22 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping.utils;
+package com.mathiaslj.configurableslayerinfo.models;
 
-import com.brastasauce.turaelskipping.TuraelSkippingPlugin;
-import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
-import net.runelite.client.util.ImageUtil;
+import lombok.Getter;
+import net.runelite.api.coords.WorldArea;
 
-import java.awt.image.BufferedImage;
+import java.util.List;
 
-public class SlayerTaskWorldMapPoint extends WorldMapPoint {
-    public SlayerTaskWorldMapPoint(WorldPoint worldPoint) {
-        super(worldPoint, null);
+@Getter
+public class NpcLocation {
+    private final String name;
+    private final String[] teleports;
+    private final List<WorldArea> worldAreas;
 
-        BufferedImage taskWorldImage = ImageUtil.loadImageResource(TuraelSkippingPlugin.class, "/turael_chathead.png");
-
-        this.setSnapToEdge(true);
-        this.setJumpOnClick(true);
-        this.setName("Turael Task");
-        this.setImage(taskWorldImage);
+    public NpcLocation(String name, List<WorldArea> worldAreas, String[] teleports) {
+        this.name = name;
+        this.worldAreas = worldAreas;
+        this.teleports = teleports;
     }
 }

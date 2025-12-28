@@ -22,10 +22,10 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.brastasauce.turaelskipping.utils;
+package com.mathiaslj.configurableslayerinfo.utils;
 
 
-import com.brastasauce.turaelskipping.TuraelSkippingConfig;
+import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoConfig;
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
@@ -47,12 +47,12 @@ import java.util.List;
 
 public class AreaOutlineOverlay extends Overlay {
     private final Client client;
-    private final TuraelSkippingConfig config;
+    private final ConfigurableSlayerInfoConfig config;
     private List<WorldArea> areas;
     private boolean useAlternativeOutline;
 
     @Inject
-    public AreaOutlineOverlay(Client client, TuraelSkippingConfig config) {
+    public AreaOutlineOverlay(Client client, ConfigurableSlayerInfoConfig config) {
         this.client = client;
         this.config = config;
 
