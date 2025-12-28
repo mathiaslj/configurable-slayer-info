@@ -26,6 +26,7 @@ package com.mathiaslj.configurableslayerinfo;
 
 public enum DebugSlayerTask {
     None,
+    Aberrant_Spectres,
     Banshees,
     Bats,
     Bears,
