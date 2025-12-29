@@ -12,5 +12,5 @@ A RuneLite plugin that lets you configure information to be shown when given sla
 
 <p align="center">
   <img src="assets/ankous.PNG" width="45%" alt="Example Ankous"/>
-  <img src="assets/cockatrice.PNG.PNG" width="45%" alt="Example Cockatrice"/>
+  <img src="assets/cockatrice.PNG" width="45%" alt="Example Cockatrice"/>
 </p>
