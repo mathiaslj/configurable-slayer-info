@@ -22,27 +22,26 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mathiaslj.configurableslayerinfo;
+package com.mathiaslj.configurableslayertaskoverlay;
 
-import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
-import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
-import com.mathiaslj.configurableslayerinfo.utils.WorldAreaUtils;
+import com.mathiaslj.configurableslayertaskoverlay.models.NpcLocation;
+import com.mathiaslj.configurableslayertaskoverlay.models.SlayerTask;
+import com.mathiaslj.configurableslayertaskoverlay.utils.WorldAreaUtils;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.gameval.NpcID;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
 public class SlayerTaskRegistry {
 
-    private final ConfigurableSlayerInfoConfig config;
+    private final ConfigurableSlayerTaskOverlayConfig config;
 
     // Map is built at runtime in the constructor, not static
     private Map<String, SlayerTask> tasks = new HashMap<>();
 
-    public SlayerTaskRegistry(ConfigurableSlayerInfoConfig config) {
+    public SlayerTaskRegistry(ConfigurableSlayerTaskOverlayConfig config) {
         this.config = config;
         rebuildTasks();
     }

@@ -22,16 +22,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mathiaslj.configurableslayerinfo;
+package com.mathiaslj.configurableslayertaskoverlay;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup(ConfigurableSlayerInfoConfig.CONFIG_GROUP_NAME)
-public interface ConfigurableSlayerInfoConfig extends Config {
-    String CONFIG_GROUP_NAME = "Configurable Slayer Info";
+@ConfigGroup(ConfigurableSlayerTaskOverlayConfig.CONFIG_GROUP_NAME)
+public interface ConfigurableSlayerTaskOverlayConfig extends Config {
+    String CONFIG_GROUP_NAME = "Configurable Slayer Task Overlay";
 
     String FREMENNIK_SLAYER_CAVE = "Fremennik slayer cave (slayer ring OR fairy ring AJR)";
     String SLAYER_TOWER = "Slayer tower: Slayer ring - alternatively fairy ring (CKS)";

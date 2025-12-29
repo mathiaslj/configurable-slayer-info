@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 // File not currently used but kept to support future implementation
-package com.mathiaslj.configurableslayerinfo.utils;
+package com.mathiaslj.configurableslayertaskoverlay.utils;
 
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;

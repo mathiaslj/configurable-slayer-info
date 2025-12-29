@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 // File not currently used but kept to support future implementation
-package com.mathiaslj.configurableslayerinfo.utils;
+package com.mathiaslj.configurableslayertaskoverlay.utils;
 
-import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoPlugin;
+import com.mathiaslj.configurableslayertaskoverlay.ConfigurableSlayerTaskOverlayPlugin;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
 import net.runelite.client.util.ImageUtil;
@@ -36,7 +36,7 @@ public class SlayerTaskWorldMapPoint extends WorldMapPoint {
     public SlayerTaskWorldMapPoint(WorldPoint worldPoint) {
         super(worldPoint, null);
 
-        BufferedImage taskWorldImage = ImageUtil.loadImageResource(ConfigurableSlayerInfoPlugin.class, "/turael_chathead.png");
+        BufferedImage taskWorldImage = ImageUtil.loadImageResource(ConfigurableSlayerTaskOverlayPlugin.class, "/turael_chathead.png");
 
         this.setSnapToEdge(true);
         this.setJumpOnClick(true);

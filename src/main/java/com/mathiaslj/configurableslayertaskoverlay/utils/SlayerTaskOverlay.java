@@ -22,12 +22,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mathiaslj.configurableslayerinfo.utils;
+package com.mathiaslj.configurableslayertaskoverlay.utils;
 
-import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoConfig;
-import com.mathiaslj.configurableslayerinfo.ConfigurableSlayerInfoPlugin;
-import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
-import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
+import com.mathiaslj.configurableslayertaskoverlay.ConfigurableSlayerTaskOverlayConfig;
+import com.mathiaslj.configurableslayertaskoverlay.ConfigurableSlayerTaskOverlayPlugin;
+import com.mathiaslj.configurableslayertaskoverlay.models.NpcLocation;
+import com.mathiaslj.configurableslayertaskoverlay.models.SlayerTask;
 import net.runelite.api.Client;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.client.ui.overlay.OverlayPanel;
@@ -41,13 +41,13 @@ import java.awt.Color;
 
 public class SlayerTaskOverlay extends OverlayPanel {
     private final Client client;
-    private final ConfigurableSlayerInfoPlugin plugin;
-    private final ConfigurableSlayerInfoConfig config;
+    private final ConfigurableSlayerTaskOverlayPlugin plugin;
+    private final ConfigurableSlayerTaskOverlayConfig config;
 
     @Inject
-    public SlayerTaskOverlay(Client client, ConfigurableSlayerInfoPlugin ConfigurableSlayerInfoPlugin, ConfigurableSlayerInfoConfig config) {
+    public SlayerTaskOverlay(Client client, ConfigurableSlayerTaskOverlayPlugin ConfigurableSlayerTaskOverlayPlugin, ConfigurableSlayerTaskOverlayConfig config) {
         this.client = client;
-        this.plugin = ConfigurableSlayerInfoPlugin;
+        this.plugin = ConfigurableSlayerTaskOverlayPlugin;
         this.config = config;
 
         setPosition(OverlayPosition.ABOVE_CHATBOX_RIGHT);

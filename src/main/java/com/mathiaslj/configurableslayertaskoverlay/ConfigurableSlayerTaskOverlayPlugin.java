@@ -22,15 +22,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mathiaslj.configurableslayerinfo;
+package com.mathiaslj.configurableslayertaskoverlay;
 
 import javax.inject.Inject;
 
-import com.mathiaslj.configurableslayerinfo.models.NpcLocation;
-import com.mathiaslj.configurableslayerinfo.models.SlayerTask;
-import com.mathiaslj.configurableslayerinfo.utils.SlayerTaskOverlay;
-import com.mathiaslj.configurableslayerinfo.utils.SlayerTaskWorldMapPoint;
-import com.mathiaslj.configurableslayerinfo.utils.WorldAreaUtils;
+import com.mathiaslj.configurableslayertaskoverlay.models.SlayerTask;
+import com.mathiaslj.configurableslayertaskoverlay.utils.SlayerTaskOverlay;
+import com.mathiaslj.configurableslayertaskoverlay.utils.SlayerTaskWorldMapPoint;
 import com.google.inject.Provides;
 
 
@@ -43,14 +41,11 @@ import net.runelite.api.NPC;
 import net.runelite.api.Player;
 import net.runelite.api.Tile;
 import net.runelite.api.WorldView;
-import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.config.ConfigManager;
@@ -68,23 +63,20 @@ import net.runelite.client.util.Text;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Slf4j
 @PluginDescriptor(
-        name = "Configurable Slayer Info",
+        name = "Configurable Slayer Task Overlay",
         description = "Configure overlay info to display when receiving slayer task",
         tags = {"slayer", "overlay", "task", "configurable"}
 )
-public class ConfigurableSlayerInfoPlugin extends Plugin {
+public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
     private static final Pattern SLAYER_ASSIGN_MESSAGE = Pattern.compile("Your new task is to kill \\d+ (?<name>.+)\\.");
     private static final Pattern SLAYER_CURRENT_MESSAGE = Pattern.compile("You're still hunting (?<name>.+)[,;] you have \\d+ to go\\.");
     private static final Pattern SLAYER_CURRENT_CHAT_MESSAGE = Pattern.compile("You're assigned to kill (?<name>.+)[,;] only \\d+ more to go\\.");
@@ -104,7 +96,7 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     private Client client;
 
     @Inject
-    private ConfigurableSlayerInfoConfig config;
+    private ConfigurableSlayerTaskOverlayConfig config;
 
     @Inject
     private OverlayManager overlayManager;
@@ -199,7 +191,7 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     @Subscribe
     public void onConfigChanged(ConfigChanged event) {
         // Ignore changes from other plugins
-        if (!event.getGroup().equals(ConfigurableSlayerInfoConfig.CONFIG_GROUP_NAME)) {
+        if (!event.getGroup().equals(ConfigurableSlayerTaskOverlayConfig.CONFIG_GROUP_NAME)) {
             return;
         }
 
@@ -298,8 +290,8 @@ public class ConfigurableSlayerInfoPlugin extends Plugin {
     }
 
     @Provides
-    ConfigurableSlayerInfoConfig provideConfig(ConfigManager configManager) {
-        return configManager.getConfig(ConfigurableSlayerInfoConfig.class);
+    ConfigurableSlayerTaskOverlayConfig provideConfig(ConfigManager configManager) {
+        return configManager.getConfig(ConfigurableSlayerTaskOverlayConfig.class);
     }
 
     private void startTask(String taskName) {

@@ -1,4 +1,4 @@
-# Configurable slayer info
+# Configurable slayer task overlay
 
 A RuneLite plugin that lets you configure information to be shown when given slayer tasks.
 
