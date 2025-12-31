@@ -72,7 +72,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     public static final int POSITION_CAVE_SLIMES = BASE + 22;
     public static final int POSITION_CAVE_KRAKEN = BASE + 23;
     public static final int POSITION_CHAOS_DRUIDS = BASE + 24;
-    public static final int POSITION_COCKATRICES = BASE + 25;
+    public static final int POSITION_COCKATRICE = BASE + 25;
     public static final int POSITION_COWS = BASE + 26;
     public static final int POSITION_CRABS = BASE + 27;
     public static final int POSITION_CRAWLING_HANDS = BASE + 28;
@@ -471,12 +471,12 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     @ConfigItem(keyName = "Chaos Druids", name = "Chaos Druids information", description = "Create individual bullet points in overlay, one per line", section = chaosDruidsSettings, position = 0)
     default String chaosDruidsInfo() { return "Edgeville dungeon (Wilderness)\n" + "Chaos druid tower (North of Ardougne)"; }
 
-    // Cockatrices
-    @ConfigSection(position = POSITION_COCKATRICES, name = "Cockatrices", closedByDefault = true, description = "Information to display for slayer task")
-    String cockatricesSettings = "cockatrices";
+    // Cockatrice
+    @ConfigSection(position = POSITION_COCKATRICE, name = "Cockatrice", closedByDefault = true, description = "Information to display for slayer task")
+    String cockatriceSettings = "cockatrice";
 
-    @ConfigItem(keyName = "Cockatrices", name = "Cockatrices information", description = "Create individual bullet points in overlay, one per line", section = cockatricesSettings, position = 0)
-    default String cockatricesInfo() { return "BRING: Mirror shield\n" + FREMENNIK_SLAYER_CAVE; }
+    @ConfigItem(keyName = "Cockatrice", name = "Cockatrice information", description = "Create individual bullet points in overlay, one per line", section = cockatriceSettings, position = 0)
+    default String cockatriceInfo() { return "BRING: Mirror shield\n" + FREMENNIK_SLAYER_CAVE; }
 
     // Cows
     @ConfigSection(position = POSITION_COWS, name = "Cows", closedByDefault = true, description = "Information to display for slayer task")

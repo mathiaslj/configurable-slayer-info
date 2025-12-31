@@ -324,15 +324,15 @@ public class SlayerTaskRegistry {
                         ), config.chaosDruidsInfo().split("\n"))
                 ))),
 
-                Map.entry("cockatrices", new SlayerTask("Cockatrices", List.of(1), List.of(
+                Map.entry("cockatrice", new SlayerTask("cockatrice", List.of(1), List.of(
                         new WorldPoint(0, 0, 0)
                 ), List.of(
-                        new NpcLocation("Cockatrices", List.of(
+                        new NpcLocation("cockatrice", List.of(
                                 WorldAreaUtils.fromCorners(
                                         new WorldPoint(0, 0, 0),
                                         new WorldPoint(0, 0, 0)
                                 )
-                        ), config.cockatricesInfo().split("\n"))
+                        ), config.cockatriceInfo().split("\n"))
                 ))),
 
                 Map.entry("cows", new SlayerTask("Cows", List.of(NpcID.COW), List.of(
