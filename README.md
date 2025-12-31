@@ -11,5 +11,5 @@ A RuneLite plugin that lets you configure information to be shown when given sla
 # Screenshots
 
 <p align="center">
-  <img src="assets/wolves-detailed.png" width="90%" alt="Plugin showcase"/>
+  <img src="assets/zombies-detailed.png" width="90%" alt="Plugin showcase"/>
 </p>
