@@ -9,7 +9,13 @@ A RuneLite plugin that lets you configure information to be shown when given sla
 - Debugging to see how the overlay will look like
 
 # Screenshots
+Basic functionality of plugin:
 
 <p align="center">
   <img src="assets/zombies-detailed.png" width="90%" alt="Plugin showcase"/>
+</p>
+
+Debugging lets you inspect the result of your changes:
+<p align="center">
+  <img src="assets/debug-gif.gif" width="90%" alt="Debug GIF"/>
 </p>
