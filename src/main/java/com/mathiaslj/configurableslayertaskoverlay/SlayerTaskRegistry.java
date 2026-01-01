@@ -708,7 +708,7 @@ public class SlayerTaskRegistry {
 
                 Map.entry("rogues", new SlayerTask("Rogues", List.of(NpcID.ROGUE), List.of(new WorldPoint(0, 0, 0)), List.of(new NpcLocation("Rogues", List.of(WorldAreaUtils.fromCorners(new WorldPoint(0, 0, 0), new WorldPoint(0, 0, 0))), config.roguesInfo().split("\n"))))),
 
-                Map.entry("scabarites", new SlayerTask("Scabarites", List.of(1), List.of(new WorldPoint(0, 0, 0)), List.of(new NpcLocation("Scabarites", List.of(WorldAreaUtils.fromCorners(new WorldPoint(0, 0, 0), new WorldPoint(0, 0, 0))), config.scabaritesInfo().split("\n"))))),
+                Map.entry("minions of scabaras", new SlayerTask("Minions of Scabaras", List.of(1), List.of(new WorldPoint(0, 0, 0)), List.of(new NpcLocation("Minions of Scabaras", List.of(WorldAreaUtils.fromCorners(new WorldPoint(0, 0, 0), new WorldPoint(0, 0, 0))), config.minionsOfScabarasInfo().split("\n"))))),
 
                 Map.entry("scorpions", new SlayerTask("Scorpions", List.of(NpcID.SCORPION, NpcID.SCORPIA), List.of(new WorldPoint(0, 0, 0)), List.of(new NpcLocation("Scorpions", List.of(WorldAreaUtils.fromCorners(new WorldPoint(0, 0, 0), new WorldPoint(0, 0, 0))), config.scorpionsInfo().split("\n"))))),
 

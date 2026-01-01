@@ -122,22 +122,22 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     public static final int POSITION_MAGIC_AXES = BASE + 72;
     public static final int POSITION_MAMMOTH = BASE + 73;
     public static final int POSITION_METAL_DRAGONS = BASE + 74;
-    public static final int POSITION_MINOTAURS = BASE + 75;
-    public static final int POSITION_MOGRES = BASE + 76;
-    public static final int POSITION_MOLANISKS = BASE + 77;
-    public static final int POSITION_MONKEYS = BASE + 78;
-    public static final int POSITION_MOSS_GIANTS = BASE + 79;
-    public static final int POSITION_NECHRYAEL = BASE + 80;
-    public static final int POSITION_OGRES = BASE + 81;
-    public static final int POSITION_OTHERWORLDLY_BEINGS = BASE + 82;
-    public static final int POSITION_PIRATES = BASE + 83;
-    public static final int POSITION_PYREFIENDS = BASE + 84;
-    public static final int POSITION_RATS = BASE + 85;
-    public static final int POSITION_RED_DRAGONS = BASE + 86;
-    public static final int POSITION_REVENANTS = BASE + 87;
-    public static final int POSITION_ROCKSLUGS = BASE + 88;
-    public static final int POSITION_ROGUES = BASE + 89;
-    public static final int POSITION_SCABARITES = BASE + 90;
+    public static final int POSITION_MINIONS_OF_SCABARAS = BASE + 75;
+    public static final int POSITION_MINOTAURS = BASE + 76;
+    public static final int POSITION_MOGRES = BASE + 77;
+    public static final int POSITION_MOLANISKS = BASE + 78;
+    public static final int POSITION_MONKEYS = BASE + 79;
+    public static final int POSITION_MOSS_GIANTS = BASE + 80;
+    public static final int POSITION_NECHRYAEL = BASE + 81;
+    public static final int POSITION_OGRES = BASE + 82;
+    public static final int POSITION_OTHERWORLDLY_BEINGS = BASE + 83;
+    public static final int POSITION_PIRATES = BASE + 84;
+    public static final int POSITION_PYREFIENDS = BASE + 85;
+    public static final int POSITION_RATS = BASE + 86;
+    public static final int POSITION_RED_DRAGONS = BASE + 87;
+    public static final int POSITION_REVENANTS = BASE + 88;
+    public static final int POSITION_ROCKSLUGS = BASE + 89;
+    public static final int POSITION_ROGUES = BASE + 90;
     public static final int POSITION_SCORPIONS = BASE + 91;
     public static final int POSITION_SEA_SNAKES = BASE + 92;
     public static final int POSITION_SHADES = BASE + 93;
@@ -926,12 +926,12 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     @ConfigItem(keyName = "Rogues", name = "Rogues information", description = "Create individual bullet points in overlay, one per line", section = roguesSettings, position = 0)
     default String roguesInfo() { return "Obelisk or Annakarl teleport to Rogue's castle"; }
 
-    // Scabarites
-    @ConfigSection(position = POSITION_SCABARITES, name = "Scabarites", closedByDefault = true, description = "Information to display for slayer task")
-    String scabaritesSettings = "scabarites";
+    // Minions of scabaras
+    @ConfigSection(position = POSITION_MINIONS_OF_SCABARAS, name = "Minions of scabaras", closedByDefault = true, description = "Information to display for slayer task")
+    String minionsOfScabarasSettings = "minionsOfScabaras";
 
-    @ConfigItem(keyName = "Scabarites", name = "Scabarites information", description = "Create individual bullet points in overlay, one per line", section = scabaritesSettings, position = 0)
-    default String scabaritesInfo() { return "Pharaoh's sceptre (1 - Jalsavrah)\n" + "Fairy ring (AKP) -> Run North to Sophanem"; }
+    @ConfigItem(keyName = "Minions of scabaras", name = "Minions of scabaras information", description = "Create individual bullet points in overlay, one per line", section = minionsOfScabarasSettings, position = 0)
+    default String minionsOfScabarasInfo() { return "Pharaoh's sceptre (1 - Jalsavrah)\n" + "Fairy ring (AKP) -> Run North to Sophanem"; }
 
     // Scorpions
     @ConfigSection(position = POSITION_SCORPIONS, name = "Scorpions", closedByDefault = true, description = "Information to display for slayer task")
