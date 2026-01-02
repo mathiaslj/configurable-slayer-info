@@ -81,6 +81,8 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
     private static final Pattern SLAYER_CURRENT_MESSAGE = Pattern.compile("You're still hunting (?<name>.+?)s?[,;] you have \\d+ to go\\.");
     private static final Pattern SLAYER_CURRENT_CHAT_MESSAGE = Pattern.compile("You're assigned to kill (?<name>.+?)s?[,;] only \\d+ more to go\\.");
 
+    private static final Pattern KONAR_CHAT_PATTERN = Pattern.compile(".+ bring(?:ing)? balance to (?:\\d+ )?(?<name>.+?)s?(?:,|;|in).+");
+
     private final Set<NPC> targets = new HashSet<>();
 
     private final String DEBUG_MENU_WORLD_POINT_ONE = "Set WorldPoint1 (Turael Skipping)";
@@ -171,15 +173,10 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
         String chatMessage = Text.removeTags(event.getMessage());
 
         if (currentSlayerTask == null) {
-            // Check if player used "Check" option on slayer helm
-            Matcher matcher = SLAYER_CURRENT_CHAT_MESSAGE.matcher(chatMessage);
+            String taskName = getTaskName(chatMessage);
 
-            if (matcher.find()) {
-                String taskName = matcher.group("name");
-
-                if (taskName != null) {
-                    startTask(taskName);
-                }
+            if (taskName != null) {
+                startTask(taskName);
             }
         } else {
             if (chatMessage.startsWith("You've completed") && chatMessage.toLowerCase().contains("slayer master")) {
@@ -337,7 +334,8 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
     }
 
     private String getTaskName(String npcText) {
-        Pattern[] patterns = {SLAYER_ASSIGN_MESSAGE, SLAYER_CURRENT_MESSAGE};
+        Pattern[] patterns = {SLAYER_ASSIGN_MESSAGE, SLAYER_CURRENT_MESSAGE, SLAYER_CURRENT_CHAT_MESSAGE,
+                KONAR_CHAT_PATTERN};
 
         for (Pattern pattern : patterns) {
             Matcher matcher = pattern.matcher(npcText);
