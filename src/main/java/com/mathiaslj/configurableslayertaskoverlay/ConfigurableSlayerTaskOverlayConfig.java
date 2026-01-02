@@ -623,7 +623,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     String gargoylesSettings = "gargoyles";
 
     @ConfigItem(keyName = "Gargoyles", name = "Gargoyles information", description = "Create individual bullet points in overlay, one per line", section = gargoylesSettings, position = 0)
-    default String gargoylesInfo() { return SLAYER_TOWER + "\n" + "Top floor or basement"; }
+    default String gargoylesInfo() { return "BRING: Rock/grantie hammer\n" + SLAYER_TOWER + "\n" + "Top floor or basement"; }
 
     // Ghosts
     @ConfigSection(position = POSITION_GHOSTS, name = "Ghosts", closedByDefault = true, description = "Information to display for slayer task")
@@ -917,7 +917,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     String rockslugsSettings = "rockslugs";
 
     @ConfigItem(keyName = "Rockslugs", name = "Rockslugs information", description = "Create individual bullet points in overlay, one per line", section = rockslugsSettings, position = 0)
-    default String rockslugsInfo() { return FREMENNIK_SLAYER_CAVE; }
+    default String rockslugsInfo() { return "BRING: Bag of salt\n" + FREMENNIK_SLAYER_CAVE; }
 
     // Rogues
     @ConfigSection(position = POSITION_ROGUES, name = "Rogues", closedByDefault = true, description = "Information to display for slayer task")
