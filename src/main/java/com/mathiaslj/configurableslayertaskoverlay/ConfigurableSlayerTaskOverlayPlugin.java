@@ -59,6 +59,8 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
 import net.runelite.client.util.Text;
+import net.runelite.api.widgets.ComponentID;
+import net.runelite.api.RenderOverview;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -153,7 +155,7 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
                         chatBoxNpcName.getText().equalsIgnoreCase("steve") ||
                         chatBoxNpcName.getText().equalsIgnoreCase("duradel") ||
                         chatBoxNpcName.getText().equalsIgnoreCase("kuradel")
-                        )
+                )
         ) {
             String npcText = Text.sanitizeMultilineText(chatBoxNpcText.getText());
             String taskName = getTaskName(npcText);
@@ -211,6 +213,7 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
 
     @Subscribe
     public void onMenuEntryAdded(MenuEntryAdded menuEntryAdded) {
+        /*
         if (!config.enableWorldPointSelector()) {
             return;
         }
@@ -259,6 +262,27 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
                     .setTarget(menuEntryAdded.getTarget())
                     .setType(MenuAction.RUNELITE)
                     .setIdentifier(menuEntryAdded.getIdentifier());
+        }
+        */
+
+        // Check if the menu is for the world map
+        final Widget map = client.getWidget(ComponentID.WORLD_MAP_MAPVIEW);
+        if (map == null)
+        {
+            return;
+        }
+
+        if (menuEntryAdded.getOption().equals("Cancel") ||
+                menuEntryAdded.getOption().equals("Walk here"))
+        {
+            // Adding right-click menu on map
+            // Add your custom menu entry
+            client.getMenu()
+                    .createMenuEntry(1)
+                    .setOption("Set")
+                    .setTarget("<col=ff9040>Slayer Location</col>")
+                    .setType(MenuAction.RUNELITE)
+                    .onClick(e -> onMapClick());
         }
     }
 
@@ -349,12 +373,61 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
     }
 
     private void setShortestPath(WorldPoint target) {
-        if (target == null){
+        if (target == null) {
             return;
         }
 
         Map<String, Object> data = new HashMap<>();
         data.put("target", target);
         eventBus.post(new PluginMessage("shortestpath", "path", data));
+    }
+
+    private void onMapClick() {
+        // Get the world point from the map click
+        final WorldPoint worldPoint = calculateMapPoint();
+
+        if (worldPoint != null) {
+            handleLocationSelected(worldPoint);
+        }
+    }
+
+    private WorldPoint calculateMapPoint() {
+        Widget map = client.getWidget(ComponentID.WORLD_MAP_MAPVIEW);
+        if (map == null) {
+            return null;
+        }
+
+        RenderOverview renderOverview = client.getRenderOverview();
+        if (renderOverview == null) {
+            return null;
+        }
+
+        float zoom = renderOverview.getWorldMapZoom();
+        net.runelite.api.Point mapPosition = renderOverview.getWorldMapPosition();
+
+        // Convert to WorldPoint
+        WorldPoint worldMapPosition = new WorldPoint(mapPosition.getX(), mapPosition.getY(), client.getPlane());
+
+        // Get mouse position as AWT Point
+        net.runelite.api.Point mouseCanvas = client.getMouseCanvasPosition();
+        java.awt.Point mousePoint = new java.awt.Point(mouseCanvas.getX(), mouseCanvas.getY());
+
+        // Calculate the world point from mouse position
+        int widgetX = mousePoint.x - map.getCanvasLocation().getX();
+        int widgetY = mousePoint.y - map.getCanvasLocation().getY();
+
+        int dx = (int) ((widgetX - map.getWidth() / 2) / zoom);
+        int dy = (int) ((widgetY - map.getHeight() / 2) / zoom);
+
+        return new WorldPoint(
+                worldMapPosition.getX() + dx,
+                worldMapPosition.getY() - dy,
+                worldMapPosition.getPlane()
+        );
+    }
+
+    private void handleLocationSelected(WorldPoint location) {
+        // Your logic here - store the location, update UI, etc.
+        log.info("Selected location: {}", location);
     }
 }
