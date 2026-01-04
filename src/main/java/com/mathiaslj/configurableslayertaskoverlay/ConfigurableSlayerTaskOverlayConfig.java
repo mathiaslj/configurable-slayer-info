@@ -171,6 +171,25 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
     )
     String generalSettings = "generalSettings";
 
+    // In your ConfigurableSlayerTaskOverlayConfig interface
+    @ConfigItem(
+            keyName = "savedTaskLocations",
+            name = "",
+            description = "",
+            hidden = true
+    )
+    default String savedTaskLocations()
+    {
+        return "";
+    }
+
+    @ConfigItem(
+            keyName = "savedTaskLocations",
+            name = "",
+            description = ""
+    )
+    void savedTaskLocations(String locations);
+
     @ConfigItem(
             position = 0,
             keyName = "displayInfo",
@@ -203,7 +222,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
             hidden = true
     )
     default boolean enableWorldMapIcon() {
-        return false;
+        return true;
     }
 
     @ConfigItem(

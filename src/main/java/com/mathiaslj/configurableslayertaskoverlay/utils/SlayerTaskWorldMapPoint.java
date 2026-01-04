@@ -36,11 +36,11 @@ public class SlayerTaskWorldMapPoint extends WorldMapPoint {
     public SlayerTaskWorldMapPoint(WorldPoint worldPoint) {
         super(worldPoint, null);
 
-        BufferedImage taskWorldImage = ImageUtil.loadImageResource(ConfigurableSlayerTaskOverlayPlugin.class, "/turael_chathead.png");
+        BufferedImage taskWorldImage = ImageUtil.loadImageResource(ConfigurableSlayerTaskOverlayPlugin.class, "/slayer_icon.png");
 
         this.setSnapToEdge(true);
         this.setJumpOnClick(true);
-        this.setName("Turael Task");
+        this.setName("Slayer Task");
         this.setImage(taskWorldImage);
     }
 }

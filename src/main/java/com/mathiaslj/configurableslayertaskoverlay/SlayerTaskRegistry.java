@@ -33,25 +33,32 @@ import net.runelite.api.gameval.NpcID;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.function.Supplier;
+import java.util.Arrays;
 
 public class SlayerTaskRegistry {
 
     private final ConfigurableSlayerTaskOverlayConfig config;
+    private final Supplier<Map<String, WorldPoint>> savedLocationsSupplier;
 
     // Map is built at runtime in the constructor, not static
     private Map<String, SlayerTask> tasks = new HashMap<>();
 
-    public SlayerTaskRegistry(ConfigurableSlayerTaskOverlayConfig config) {
+    public SlayerTaskRegistry(ConfigurableSlayerTaskOverlayConfig config, Supplier<Map<String, WorldPoint>> savedLocationsSupplier) {
         this.config = config;
+        this.savedLocationsSupplier = savedLocationsSupplier;
         rebuildTasks();
     }
 
     public void rebuildTasks()
     {
+        // Load saved locations from config by calling the supplier
+        Map<String, WorldPoint> savedLocations = savedLocationsSupplier.get();
+
         tasks = Map.ofEntries(
-                Map.entry("aberrant spectres", new SlayerTask("Aberrant spectres", List.of(NpcID.SLAYER_ABBERANT_SPECTRE_1), List.of(
-                        new WorldPoint(0, 0, 0)
-                ), List.of(
+                Map.entry("aberrant spectres", new SlayerTask("Aberrant spectres", List.of(NpcID.SLAYER_ABBERANT_SPECTRE_1),
+                                Arrays.asList(savedLocations.getOrDefault("aberrant spectres", new WorldPoint(0, 0, 0)))
+                , List.of(
                         new NpcLocation("Aberrant spectres", List.of(
                                 WorldAreaUtils.fromCorners(
                                         new WorldPoint(0, 0, 0),
@@ -126,9 +133,9 @@ public class SlayerTaskRegistry {
                         ), config.banditsInfo().split("\n"))
                 ))),
 
-                Map.entry("banshees", new SlayerTask("Banshees", List.of(1), List.of(
-                        new WorldPoint(3442, 3542, 0)
-                ), List.of(
+                Map.entry("banshees", new SlayerTask("Banshees", List.of(1),
+                        Arrays.asList(savedLocations.getOrDefault("banshees", new WorldPoint(0, 0, 0))),
+                        List.of(
                         new NpcLocation("Morytania Slayer Tower", List.of(
                                 WorldAreaUtils.fromCorners(
                                         new WorldPoint(3431, 3530, 0),
