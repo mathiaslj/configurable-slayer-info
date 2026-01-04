@@ -343,8 +343,8 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
         if (lookupSlayerTask != null) {
             this.currentSlayerTask = lookupSlayerTask;
 
-            //if (config.enableWorldMapIcon()) {
-                worldMapPointManager.removeIf(point -> point instanceof SlayerTaskWorldMapPoint);
+            if (config.enableWorldMapIcon()) {
+                // worldMapPointManager.removeIf(point -> point instanceof SlayerTaskWorldMapPoint);
 
                 for (WorldPoint worldPoint : currentSlayerTask.getWorldMapLocations()) {
                     // Skip invalid/default locations
@@ -354,7 +354,7 @@ public class ConfigurableSlayerTaskOverlayPlugin extends Plugin {
 
                     worldMapPointManager.add(new SlayerTaskWorldMapPoint(worldPoint));
                 }
-            //}
+            }
 
             if (config.useShortestPath()) {
                 WorldPoint location = currentSlayerTask.getShortestPathWorldPoint();

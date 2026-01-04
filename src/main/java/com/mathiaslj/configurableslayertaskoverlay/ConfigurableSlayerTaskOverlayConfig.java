@@ -195,8 +195,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
             keyName = "displayInfo",
             name = "Enable information box",
             description = "Whether to show an information box with information about the current task.",
-            section = generalSettings,
-            hidden = true
+            section = generalSettings
     )
     default boolean enableInformationBox() {
         return true;
@@ -206,7 +205,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
             position = 1,
             keyName = "automaticallyHideInformationBox",
             name = "Automatically hide information box",
-            description = "Whether to automatically hide the information box when you are at your current task.",
+            description = "Whether to automatically hide the information box when you at the location of your current task.",
             section = generalSettings
     )
     default boolean automaticallyHideInformationBox() {
@@ -218,8 +217,7 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
             keyName = "displayMapIcon",
             name = "Enable world map icon",
             description = "Displays an icon on the world map where the current task is located.",
-            section = generalSettings,
-            hidden = true
+            section = generalSettings
     )
     default boolean enableWorldMapIcon() {
         return true;
@@ -229,10 +227,9 @@ public interface ConfigurableSlayerTaskOverlayConfig extends Config {
             position = 3,
             keyName = "useShortestPath",
             name = "Use 'Shortest Path' plugin",
-            description = "Draws the shortest path to the assigned task.<br/>" +
+            description = "Draws the shortest path to the assigned task (remember to set the task location by right-clicking the world map).<br/>" +
                     "The 'Shortest Path' plugin needs to be installed and enabled for this to work.",
-            section = generalSettings,
-            hidden = true
+            section = generalSettings
     )
     default boolean useShortestPath() {
         return false;

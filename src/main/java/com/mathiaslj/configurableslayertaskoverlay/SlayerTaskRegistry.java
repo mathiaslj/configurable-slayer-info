@@ -29,12 +29,14 @@ import com.mathiaslj.configurableslayertaskoverlay.models.SlayerTask;
 import com.mathiaslj.configurableslayertaskoverlay.utils.WorldAreaUtils;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.gameval.NpcID;
+import net.runelite.api.coords.WorldArea;
 
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.function.Supplier;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class SlayerTaskRegistry {
 
@@ -54,6 +56,7 @@ public class SlayerTaskRegistry {
     {
         // Load saved locations from config by calling the supplier
         Map<String, WorldPoint> savedLocations = savedLocationsSupplier.get();
+        WorldPoint bansheesLocation = savedLocations.getOrDefault("banshees", new WorldPoint(0, 0, 0));
 
         tasks = Map.ofEntries(
                 Map.entry("aberrant spectres", new SlayerTask("Aberrant spectres", List.of(NpcID.SLAYER_ABBERANT_SPECTRE_1),
@@ -134,15 +137,10 @@ public class SlayerTaskRegistry {
                 ))),
 
                 Map.entry("banshees", new SlayerTask("Banshees", List.of(1),
-                        Arrays.asList(savedLocations.getOrDefault("banshees", new WorldPoint(0, 0, 0))),
-                        List.of(
-                        new NpcLocation("Morytania Slayer Tower", List.of(
-                                WorldAreaUtils.fromCorners(
-                                        new WorldPoint(3431, 3530, 0),
-                                        new WorldPoint(3452, 3567, 0)
-                                )
-                        ), config.bansheesInfo().split("\n"))
-                ))),
+                        Collections.singletonList(bansheesLocation),
+                        createNpcLocationsFromWorldPoint("Banshees", bansheesLocation,
+                                config.bansheesInfo().split("\n"))
+                )),
 
                 Map.entry("basilisks", new SlayerTask("Basilisks", List.of(1), List.of(
                         new WorldPoint(0, 0, 0)
@@ -778,6 +776,30 @@ public class SlayerTaskRegistry {
             task = tasks.get(pluralis);
         }
         return task;
+    }
+
+    private List<NpcLocation> createNpcLocationsFromWorldPoint(String name, WorldPoint location, String[] info) {
+        return createNpcLocationsFromWorldPoint(name, location, info, 25); // default padding of 10
+    }
+
+    private List<NpcLocation> createNpcLocationsFromWorldPoint(String name, WorldPoint location, String[] info, int padding) {
+        if (location.getX() == 0 && location.getY() == 0) {
+            return List.of(
+                    new NpcLocation(name, List.of(
+                            WorldAreaUtils.fromCorners(
+                                    new WorldPoint(0, 0, 0),
+                                    new WorldPoint(0, 0, 0)
+                            )
+                    ), info)
+            );
+        }
+
+        WorldArea area = WorldAreaUtils.fromCorners(
+                new WorldPoint(location.getX() - padding, location.getY() - padding, location.getPlane()),
+                new WorldPoint(location.getX() + padding, location.getY() + padding, location.getPlane())
+        );
+
+        return List.of(new NpcLocation(name, List.of(area), info));
     }
 
     /**
